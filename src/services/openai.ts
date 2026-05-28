@@ -2,10 +2,6 @@ import axios from 'axios';
 import { ProcessedCampaignData } from '../types/campaign';
 import { subDays, format } from 'date-fns';
 
-const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-
-// Modelo GPT-4o-mini - excelente custo-benefício para análise de dados
-// Preço: $0.15/1M input tokens, $0.60/1M output tokens
 const MODEL = 'gpt-4o-mini';
 
 interface VehicleMetrics {
@@ -254,7 +250,7 @@ const callOpenAIAPI = async (prompt: string): Promise<string> => {
     console.log(`🔄 Gerando análise com modelo: ${MODEL}...`);
 
     const response = await axios.post(
-      'https://api.openai.com/v1/chat/completions',
+      '/api/openai',
       {
         model: MODEL,
         messages: [
@@ -272,10 +268,9 @@ const callOpenAIAPI = async (prompt: string): Promise<string> => {
       },
       {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${API_KEY}`
+          'Content-Type': 'application/json'
         },
-        timeout: 60000
+        timeout: 65000
       }
     );
 

@@ -50,6 +50,7 @@ export interface ProcessedCampaignData {
   viewability?: number;
   campanha: string;
   numeroPi: string;
+  regiao?: string; // Cidade de entrega (coluna "Região")
   realInvestment?: number; // Investimento calculado pela tabela de preços
 }
 

@@ -13,7 +13,12 @@ import OnDemandAnalysis from './components/OnDemandAnalysis';
 import CreativeAnalysis from './components/CreativeAnalysis';
 import ParticlesBackground from './components/ParticlesBackground';
 import PIInfoCard from './components/PIInfoCard';
+import RegionAnalysis from './components/RegionAnalysis';
 import { subDays } from 'date-fns';
+
+// PIs que possuem entrega dividida por cidade (coluna "Região")
+const PIS_COM_REGIAO = ['682', '720'];
+const normalizePi = (pi: string) => pi.trim().replace(/^0+/, '');
 
 const DashboardContent = () => {
   const { loading, error, campaigns, filteredData, filters, setFilters, data } = useCampaign();
@@ -414,6 +419,12 @@ const DashboardContent = () => {
               selectedCampaign={selectedCampaign}
             />
           </div>
+
+          {selectedPI && PIS_COM_REGIAO.includes(normalizePi(selectedPI)) && (
+            <div>
+              <RegionAnalysis data={displayData} />
+            </div>
+          )}
 
         </div>
       </main>

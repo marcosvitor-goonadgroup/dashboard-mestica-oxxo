@@ -78,6 +78,7 @@ export const fetchCampaignData = async (): Promise<ProcessedCampaignData[]> => {
           // [11]=Cost(Spend) [12]=Impressions [13]=Clicks [14]=Views 10% [15]=Views 50%
           // [16]=Views 75% [17]=Views 100% [18]=VA [19]=Agência [20]=Veículo
           // [21]=Número PI [22]=Tipo de Compra [23]=Investimento [24]=Formato [25]=Campanha
+          // [26]=Cliente [27]=Região
           if (row.length >= 14) {
             const veiculoRaw = row[20] || '';
             const veiculo = normalizeVeiculo(veiculoRaw);
@@ -102,7 +103,8 @@ export const fetchCampaignData = async (): Promise<ProcessedCampaignData[]> => {
               videoEstaticoAudio: row[24] || '',
               viewability: 0,
               campanha: row[25] || '',
-              numeroPi: row[21] || ''
+              numeroPi: row[21] || '',
+              regiao: (row[27] || '').trim()
             };
             allData.push(dataRow);
           }
